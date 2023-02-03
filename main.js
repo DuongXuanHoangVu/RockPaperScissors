@@ -32,50 +32,44 @@ function playerSelection () {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let isPlayerWin = false
+    const result = {
+        isPlayerWin: false,
+        isComputerWin: false,
+    }
     console.log(playerSelection)
     console.log(computerSelection)
     console.log(playerSelection[computerSelection])
     if (playerSelection[computerSelection] === 'tie') {
         alert('It\'s a tie!')
     } else if (playerSelection[computerSelection] === 'win') {
-        isPlayerWin = true        
+        result.isPlayerWin = true        
         alert('You win!')
     } else {
-        isPlayerWin = false
+        result.isComputerWin = true
         alert('You lose!')
     }
-    return isPlayerWin
-    // if (playerSelection === computerSelection) {
-    //     alert('It\'s a tie!')
-    // } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') {
-    //     alert('You win!')
-    // } else if (playerSelection === 'ROCK' && computerSelection === 'PAPER') {
-    //     alert('You lose!')
-    // } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK') {
-    //     alert('You win!')
-    // } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') {
-    //     alert('You lose!')
-    // } else if (playerSelection === 'SCISSORS' && computerSelection === 'ROCK') {
-    //     alert('You win!')
-    // } else if (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') {
-    //     alert('You lose!')
-    // }
+    return result
 }
 
 function game() {
     let countPlayerWin = 0;
+    let countComputerWin =0;
     for (let i = 0; i < 5; i++) {
         const result = playRound(playerSelection(), getComputerChoice())
-        if (result) {
+        if (result.isPlayerWin) {
             countPlayerWin++
+        } else if (result.isComputerWin)  {
+            countComputerWin++
         }
         console.log(countPlayerWin)
+        console.log(countComputerWin)
     }
-    if (countPlayerWin > 2) {
+    if (countPlayerWin > countComputerWin) {
         alert('Game over! You win!')
-    } else {
+    } else if (countPlayerWin < countComputerWin) {
         alert('Game over! You lose!')
+    } else {
+        alert('Game over! tie!')
     }
 }
 
